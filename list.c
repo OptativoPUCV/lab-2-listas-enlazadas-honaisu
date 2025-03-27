@@ -28,7 +28,7 @@ Node * createNode(void * data) {
     return new;
 }
 
-List * createList() {
+List * createList() { // Inicializa los datos en nulo
     List* list = (List*) malloc(sizeof(List)) ;
     list->current = NULL ;
     list->head = NULL ;
@@ -36,17 +36,17 @@ List * createList() {
     return list ;
 }
 
-void * firstList(List * list) {
-    if (list->head == NULL) return NULL ;
-    Node* primero = list->head->data ;
-    list->current = list->head ;
+void * firstList(List * list) { // Retorna el primer dato de la lista
+    if (list->head == NULL) return NULL ; // Si la cabeza no existe, retorna nulo
+    Node* primero = list->head->data ; // Referencia al dato de la cabeza (primero)
+    list->current = list->head ; // El actual se vuelve la cabeza
     return primero ;
 }
 
-void * nextList(List * list) {
-    if (list->current->next->data == NULL) return NULL ;
-    Node* siguiente = list->head->next->data ;
-    list->current = list->head->next ;
+void * nextList(List * list) { // Retorna el siguiente dato de la lista
+    if (list->current == NULL) return NULL ; // Verifica si el actual es nulo
+    Node* siguiente = list->current->next->data ;
+    list->current = list->current->next ;
     return siguiente ;
 }
 
