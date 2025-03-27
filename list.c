@@ -37,23 +37,23 @@ List * createList() { // Inicializa los datos en nulo
 }
 
 void * firstList(List * list) { // Retorna el primer dato de la lista
-    if (list->head == NULL) return NULL ; // Si la cabeza no existe, retorna nulo
+    if (!list->head) return NULL ; // Si la cabeza no existe, retorna nulo
     list->current = list->head ; // El actual se vuelve la cabeza
     return list->head->data ;
 }
 
 void * nextList(List * list) { // Retorna el siguiente dato de la lista
-    if (list->current != NULL) list->current = list->current->next ; // Si el actual no es nulo, avanza al siguiente
+    if (list->current) list->current = list->current->next ; // Si el actual no es nulo, avanza al siguiente
     return (list->current) ? list->current->data : NULL ;
 }
 
 void * lastList(List * list) {
-    while (list->current->next != NULL) list->current = list->current->next ;
+    while (list->current->next) list->current = list->current->next ;
     return (list->current) ? list->current->data : NULL ;
 }
 
 void * prevList(List * list) {
-    if (list->current->prev)
+    if (list->current->prev) ;
     return NULL;
 }
 
