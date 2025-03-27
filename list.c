@@ -38,15 +38,14 @@ List * createList() { // Inicializa los datos en nulo
 
 void * firstList(List * list) { // Retorna el primer dato de la lista
     if (list->head == NULL) return NULL ; // Si la cabeza no existe, retorna nulo
-    Node* primero = list->head->data ; // Referencia al dato de la cabeza (primero)
     list->current = list->head ; // El actual se vuelve la cabeza
-    return primero ;
+    return list->head->data ;
 }
 
 void * nextList(List * list) { // Retorna el siguiente dato de la lista
-    Node* siguiente = list->current->next ;
-    list->current = siguiente ;
-    return siguiente->data ;
+    list->current = list->current->next ;
+    if (list->current != NULL) return list->current->data ;
+    return NULL ;
 }
 
 void * lastList(List * list) {
