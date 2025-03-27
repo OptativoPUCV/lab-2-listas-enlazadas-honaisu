@@ -190,3 +190,9 @@ list.c:61:6: note: declared here
 cc1.exe: all warnings being treated as errors
 Compilation failed
 7021682
+Wed, Mar 26, 2025 11:17:45 PM: 
+ list.c | 1 -
+ 1 file changed, 1 deletion(-)
+ tests:  9|3
+total_score: 35/70
+4010d01
