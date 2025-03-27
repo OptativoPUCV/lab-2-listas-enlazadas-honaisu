@@ -44,10 +44,9 @@ void * firstList(List * list) { // Retorna el primer dato de la lista
 }
 
 void * nextList(List * list) { // Retorna el siguiente dato de la lista
-    if (list->current == NULL) return NULL ; // Verifica si el actual es nulo
-    Node* siguiente = list->current->next->data ;
-    list->current = list->current->next ;
-    return siguiente ;
+    Node* siguiente = list->current->next ;
+    list->current = siguiente ;
+    return siguiente->data ;
 }
 
 void * lastList(List * list) {
