@@ -43,13 +43,14 @@ void * firstList(List * list) { // Retorna el primer dato de la lista
 }
 
 void * nextList(List * list) { // Retorna el siguiente dato de la lista
-    if (list->current != NULL) list->current = list->current->next ;
-    if (list->current != NULL) return list->current->data ;
+    if (list->current != NULL) list->current = list->current->next ; // Si el actual no es nulo, avanza al siguiente
+    if (list->current != NULL) return list->current->data ; // Si el siguiente no es nulo, retorna el dato
     return NULL ;
 }
 
 void * lastList(List * list) {
-    return NULL;
+    while (list->current->next != NULL) list->current = list->current->next ;
+    return (list->current != NULL) ? list->current->data : NULL ;
 }
 
 void * prevList(List * list) {
