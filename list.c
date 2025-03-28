@@ -100,6 +100,13 @@ void * popCurrent(List * list) {
     void* data = list->current->data ;
 
     if (list->current) {
+        if (list->current == list->head) {
+            list->head = list->current->next ;    
+        } 
+        if (list->current == list->tail) {
+            list->tail = list->current->prev ;
+        }
+
         Node* Prev = list->current->prev ;
         Node* Next = list->current->next ;
 
