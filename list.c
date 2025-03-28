@@ -73,17 +73,17 @@ void pushBack(List * list, void * data) {
 
 void pushCurrent(List * list, void * data) {
     Node* newNode = createNode(data) ;
-    if (!list->current) {
-        pushFront(list, data) ;
+    if (!list->current) { // Si no hay current
+        pushFront(list, data) ; // Se hace un pushFront
         return ;
     }
 
     newNode->prev = list->current ;
     newNode->next = list->current->next ;
-    if (list->current->next) { 
-        list->current->next->prev = newNode ;
-    } else list->tail = newNode ;
-    list->current->next = newNode ;
+    if (list->current->next) {  // Si existe el siguiente de la lista
+        list->current->next->prev = newNode ; // El previo del siguiente apunta al nuevo nodo
+    } else list->tail = newNode ; // Si no, apunta a la cola (puesto que sería el "último" dato)
+    list->current->next = newNode ; // Se asigna el siguiente del current al nuevo nodo
 }
 
 void * popFront(List * list) {
@@ -97,7 +97,17 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    return NULL;
+    void* data = &(*list->current->data) ;
+
+    if (list->current) {
+        Node* Prev = list->current->prev ;
+        Node* Next = list->current->next ;
+
+        Prev->next = Next ;
+        Next->prev = Prev ;
+        list->current = Next ;
+    } else return NULL ;
+    return data;
 }
 
 void cleanList(List * list) {
