@@ -61,9 +61,9 @@ void * prevList(List * list) {
 void pushFront(List * list, void * data) {
     Node* newNode = createNode(data) ;
     newNode->next = list->head ;
-    if (list->head) list->head->prev = newNode ;
+    if (list->head) list->head->prev = newNode ; // Si la cabeza no es nulo, el previo apuntará al nuevo nodo
     else list->tail = newNode ; // Si es que no existe la cabeza, la cola también apuntará al nuevo nodo (puesto que será el primer valor)
-    list->head = newNode ;
+    list->head = newNode ; // La cabeza será el nuevo nodo
 }
 
 void pushBack(List * list, void * data) {
@@ -74,10 +74,10 @@ void pushBack(List * list, void * data) {
 void pushCurrent(List * list, void * data) {
     Node* newNode = createNode(data) ;
     if (!list->current) { // Si no hay current
-        pushFront(list, data) ; // Se hace un pushFront
+        pushFront(list, data) ; // Se hace un pushFront (poner el dato en primer posición)
         return ;
     }
-
+    // Apuntar las direcciones del nuevo nodo al actual (para el previo) y el siguiente del actual (para el siguiente del nuevo)
     newNode->prev = list->current ;
     newNode->next = list->current->next ;
     if (list->current->next) {  // Si existe el siguiente de la lista
@@ -97,25 +97,27 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    void* data = list->current->data ;
+    void* data = list->current->data ; // Puntero a la direccion del dato
 
     if (list->current) {
-        if (list->current == list->head) {
-            list->head = list->current->next ;    
+        if (list->current == list->head) { // Si es que el current es la cabeza
+            list->head = list->current->next ; // Muevo el current a la siguiente posición
         } 
-        if (list->current == list->tail) {
-            list->tail = list->current->prev ;
+        if (list->current == list->tail) { // Si es la cola
+            list->tail = list->current->prev ; // La mueva a la posición anterior
         }
-
+        // Pivotes que referencian la parte anterior y posterior del nodo actual
         Node* Prev = list->current->prev ;
         Node* Next = list->current->next ;
-
+        // Si es que existen, apuntarán a su dirección
         if (Prev) Prev->next = Next ;
         if (Next) Next->prev = Prev ;
+        // Liberar el current
         free(list->current) ;
+        // Mover el current al siguiente nodo
         list->current = Next ;
-    } else return NULL ;
-    return data;
+    } else return NULL ; // Si no hay current, retorna nulo
+    return data; // Si hay current, retornar el dato
 }
 
 void cleanList(List * list) {
