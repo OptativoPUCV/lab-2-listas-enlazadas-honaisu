@@ -62,7 +62,7 @@ void pushFront(List * list, void * data) {
     Node* newNode = createNode(data) ;
     newNode->next = list->head ;
     if (list->head) list->head->prev = newNode ;
-    else list->tail = newNode ;
+    else list->tail = newNode ; // Si es que no existe la cabeza, la cola también apuntará al nuevo nodo (puesto que será el primer valor)
     list->head = newNode ;
 }
 
@@ -72,6 +72,13 @@ void pushBack(List * list, void * data) {
 }
 
 void pushCurrent(List * list, void * data) {
+    Node* newNode = createNode(data) ;
+    
+    if (list->current) {
+        newNode->prev = list->current ;
+        list->current->next->prev = newNode ;
+        list->current->next = newNode ;
+    } 
 }
 
 void * popFront(List * list) {
